@@ -47,27 +47,5 @@ node{
         ]
     ])
 	  
-		//sh 'env > env.txt'
-		//readFile('env.txt').split("\r?\n").each {
-		//println it
-		//}
-	echo "(*****)"
-	  echo "Demo1234 ${AltoroComponent_VersionId}"
-	  def newComponentVersionId = "${AltoroComponent_VersionId}"
-	  echo "git commit ${GIT_COMMIT}"
-	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "Altoro", requestor: "admin", id: "${newComponentVersionId}" )
-	  echo "Demo123 ${newComponentVersionId}"
-	sleep 25
-	  step([$class: 'UCDeployPublisher',
-		deploy: [ createSnapshot: [deployWithSnapshot: true, 
-			 snapshotName: "1.${BUILD_NUMBER}"],
-			 deployApp: 'Altoro', 
-			 deployDesc: 'Requested from Jenkins', 
-			 deployEnv: 'Altoro_Dev', 
-			 deployOnlyChanged: false, 
-			 deployProc: 'Deploy-Altoro', 
-			 deployReqProps: '', 
-			 deployVersions: "AltoroComponent:1.${BUILD_NUMBER}"], 
-		siteName: 'ucd-server'])
  }
 }
