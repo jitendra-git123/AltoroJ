@@ -19,9 +19,9 @@ node{
         sh "${path}/bin/gradle --info -Dsonar.host.url=$SONAR_HOST_URL sonarqube"
     }
   }
-   stage ("Appscan"){
-       appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 20)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39421562', scanner: static_analyzer(hasOptions: false, target: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/'), type: 'Static Analyzer'
-  }
+   //stage ("Appscan"){
+     //  appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 20)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39421562', scanner: static_analyzer(hasOptions: false, target: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/'), type: 'Static Analyzer'
+  //}
 	
   stage('Publish Artificats to UCD'){
 	   step([$class: 'UCDeployPublisher',
@@ -36,7 +36,7 @@ node{
 	            ],
 	            delivery: [
 	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-	                pushVersion: '1.${BUILD_NUMBER}',
+	                pushVersion: '1.0.${BUILD_NUMBER}',
 	                //baseDir: '/var/jenkins_home/workspace/JPetStore/target',
 			 baseDir: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/',
 	                fileIncludePatterns: '*.war',
@@ -60,7 +60,7 @@ node{
 	sleep 25
 	  step([$class: 'UCDeployPublisher',
 		deploy: [ createSnapshot: [deployWithSnapshot: true, 
-			 snapshotName: "1.${BUILD_NUMBER}"],
+			 snapshotName: "1.0.${BUILD_NUMBER}"],
 			 deployApp: 'Altoro', 
 			 deployDesc: 'Requested from Jenkins', 
 			 deployEnv: 'Altoro_Dev', 
