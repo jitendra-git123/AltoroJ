@@ -63,7 +63,7 @@ node{
 			 snapshotName: "1.${BUILD_NUMBER}"],
 			 deployApp: 'Altoro', 
 			 deployDesc: 'Requested from Jenkins', 
-			 deployEnv: 'Deploy-Altoro', 
+			 deployEnv: 'Altoro_Dev', 
 			 deployOnlyChanged: false, 
 			 deployProc: 'Deploy-Altoro', 
 			 deployReqProps: '', 
