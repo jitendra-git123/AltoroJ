@@ -19,26 +19,26 @@ node{
         sh "${path}/bin/gradle --info -Dsonar.host.url=$SONAR_HOST_URL sonarqube"
     }
   }
-	stage ("Appscan"){
-		appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 20)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39421562', scanner: static_analyzer(hasOptions: false, target: '/var/jenkins_home/workspace/Altoro/build/libs/'), type: 'Static Analyzer'
-	}
+	//stage ("Appscan"){
+	//	appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 20)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39421562', scanner: static_analyzer(hasOptions: false, target: '/var/jenkins_home/workspace/Altoro/build/libs/'), type: 'Static Analyzer'
+	//}
 	
   stage('Publish Artificats to UCD'){
    step([$class: 'UCDeployPublisher',
         siteName: 'ucd-server',
         component: [
             $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            componentName: 'AltoroComponent',
+            componentName: 'cole_demo',
             createComponent: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
                 componentTemplate: '',
-                componentApplication: 'Altoro'
+                componentApplication: 'cole_demo'
             ],
             delivery: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
                 pushVersion: '1.${BUILD_NUMBER}',
                 //baseDir: '/var/jenkins_home/workspace/JPetStore/target',
-		 baseDir: '/var/jenkins_home/workspace/Altoro/build/libs/',
+		 baseDir: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/',
                 fileIncludePatterns: '*.war',
                 fileExcludePatterns: '',
                // pushProperties: 'jenkins.server=Jenkins-app\njenkins.reviewed=false',
@@ -61,11 +61,11 @@ node{
 	  step([$class: 'UCDeployPublisher',
 		deploy: [ createSnapshot: [deployWithSnapshot: true, 
 			 snapshotName: "1.${BUILD_NUMBER}"],
-			 deployApp: 'Altoro', 
+			 deployApp: 'cole_demo', 
 			 deployDesc: 'Requested from Jenkins', 
-			 deployEnv: 'Altoro_Dev', 
+			 deployEnv: 'Dev', 
 			 deployOnlyChanged: false, 
-			 deployProc: 'Deploy-Altoro', 
+			 deployProc: 'deploy', 
 			 deployReqProps: '', 
 			 deployVersions: "AltoroComponent:1.${BUILD_NUMBER}"], 
 		siteName: 'ucd-server'])
