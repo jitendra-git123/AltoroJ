@@ -1,6 +1,6 @@
 node{
 	
-	currentBuild.displayName = "1.${BUILD_NUMBER}"
+	currentBuild.displayName = "1.0.${BUILD_NUMBER}"
 	def GIT_COMMIT
   stage ('cloning the repository'){
       git 'https://github.com/tapansirol/AltoroJ.git'
@@ -67,7 +67,7 @@ node{
 			 deployOnlyChanged: false, 
 			 deployProc: 'Deploy-Altoro', 
 			 deployReqProps: '', 
-			 deployVersions: "AltoroComponent:1.${BUILD_NUMBER}"], 
+			 deployVersions: "AltoroComponent:1.0.${BUILD_NUMBER}"], 
 		siteName: 'UCD_Local'])
 
 		  
