@@ -24,28 +24,6 @@ node{
    //}
 	
   stage('Publish Artificats to UCD'){
-   step([$class: 'UCDeployPublisher',
-        siteName: 'ucd-server',
-        component: [
-            $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            componentName: 'AltoroComponent',
-            createComponent: [
-                $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-                componentTemplate: '',
-                componentApplication: 'Altoro'
-            ],
-            delivery: [
-                $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-                pushVersion: '1.${BUILD_NUMBER}',
-                //baseDir: '/var/jenkins_home/workspace/JPetStore/target',
-		 baseDir: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/',
-                fileIncludePatterns: '*.war',
-                fileExcludePatterns: '',
-               // pushProperties: 'jenkins.server=Jenkins-app\njenkins.reviewed=false',
-                pushDescription: 'Pushed from Jenkins'
-            ]
-        ]
-    ])
-	  
+	  step([$class: 'UCDeployPublisher', component: [componentName: 'AltoroComponent', componentTag: '', delivery: [$class: 'Push', baseDir: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/', fileExcludePatterns: '', fileIncludePatterns: '*.war', pushDescription: '', pushIncremental: false, pushProperties: 'dockerImage=122285136466.dkr.ecr.us-east-1.amazonaws.com/ci-lab-image:latest', pushVersion: "1.${BUILD_NUMBER}"]], deploy: [createSnapshot: [deployWithSnapshot: true, snapshotName: "1.${BUILD_NUMBER}"], deployApp: 'Altoro', deployDesc: 'Requested from Jenkins', deployEnv: 'Altoro_Dev', deployOnlyChanged: true, deployProc: 'Deploy-Altoro', deployReqProps: '', deployVersions: "1.${BUILD_NUMBER}"], siteName: 'udeploy-server-pipeline'])
  }
 }
