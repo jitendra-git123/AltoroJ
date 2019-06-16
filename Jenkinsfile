@@ -10,7 +10,7 @@ node{
        //def gradleHome = tool name : 'mygradle', type 'gradle',
         //sh "${gradleHome}/bin/gradle clean build"
         def path = tool name: 'gradle-4.7', type: 'gradle'
-        sh "C:/gradle-4.7/bin/gradle build"
+        sh "${path}/bin/gradle build"
    }
    
    stage('SonarQube analysis') {
