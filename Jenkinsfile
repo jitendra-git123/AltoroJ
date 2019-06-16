@@ -23,7 +23,7 @@ node{
      //  appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 20)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39421562', scanner: static_analyzer(hasOptions: false, target: 'D:/Installables/Jenkins/workspace/Velocity/AltoroJ/build/libs/'), type: 'Static Analyzer'
   //}
 	
-  stage('Publish Artificats to UCD'){
+   stage('Publish Artificats to UCD'){
 	   step([$class: 'UCDeployPublisher',
 	        siteName: 'UCD_Local',
 	        component: [
