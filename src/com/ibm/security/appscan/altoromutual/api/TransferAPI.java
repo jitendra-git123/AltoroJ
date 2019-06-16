@@ -26,7 +26,7 @@ public class TransferAPI extends AltoroAPI {
 		
 		try {
 			myJson =new JSONObject(bodyJSON);
-			//Get the transaction parameters
+			//Get the transaction parameters latest
 			creditActId = Long.parseLong(myJson.get("toAccount").toString());
 			fromAccount = Long.parseLong(myJson.get("fromAccount").toString());
 			amount = Double.parseDouble(myJson.get("transferAmount").toString());
