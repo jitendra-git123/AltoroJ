@@ -10,13 +10,13 @@ node{
      //def gradleHome = tool name : 'mygradle', type 'gradle',
         //sh "${gradleHome}/bin/gradle clean build"
         def path = tool name: 'gradle-4.7', type: 'gradle'
-        bat "${path}/bin/gradle build"
+        sh "${path}/bin/gradle build"
    }
    
    stage('SonarQube analysis') {
     def path = tool name: 'gradle-4.7', type: 'gradle'
     withSonarQubeEnv('sonar-server') {
-        bat "${path}/bin/gradle --info -Dsonar.host.url=http://localhost:9000 sonarqube"
+        sh "${path}/bin/gradle --info -Dsonar.host.url=http://localhost:9000 sonarqube"
     }
   }
    //stage ("Appscan"){
