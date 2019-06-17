@@ -51,7 +51,7 @@ node{
 		//readFile('env.txt').split("\r?\n").each {
 		//println it
 		//}
-	echo "(*****)"
+	echo "(*******)"
 	  echo "Demo1234 ${AltoroComponent_VersionId}"
 	  def newComponentVersionId = "${AltoroComponent_VersionId}"
 	  echo "git commit ${GIT_COMMIT}"
