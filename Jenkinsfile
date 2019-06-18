@@ -17,7 +17,7 @@ node{
     def path = tool name: 'gradle-4.7', type: 'gradle'
     withSonarQubeEnv('sonar-server') {
         sh "${path}/bin/gradle --info -Dsonar.host.url=http://localhost:9000 sonarqube"
-	curl -k -u admin:admin -X POST https://localhost:444/reporting-consumer/integration -d '{"type": "sonarqubePlugin","tenant_id": "5ade13625558f2c6688d15ce","name": "AltoroJ SonarQube Integration","properties": {"url": "http://localhost:9000","authToken": "e26ad3274713eca6fd7c975ce3a4f043405c5836"}}'    
+	sh curl -k -u 'admin:admin' -X POST https://localhost:444/reporting-consumer/integration -d '{"type": "sonarqubePlugin","tenant_id": "5ade13625558f2c6688d15ce","name": "AltoroJ SonarQube Integration","properties": {"url": "http://localhost:9000","authToken": "e26ad3274713eca6fd7c975ce3a4f043405c5836"}}'    
 	    
     }
   }
