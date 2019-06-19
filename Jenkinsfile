@@ -56,8 +56,17 @@ node{
 	  echo "Demo1234 ${AltoroComponent_VersionId}"
 	  def newComponentVersionId = "${AltoroComponent_VersionId}"
 	  echo "git commit ${GIT_COMMIT}"
-	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "Altoro", requestor: "admin", id: "${newComponentVersionId}" )
-	  echo "Demo123 ${newComponentVersionId}"
+	  //step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "Altoro", requestor: "admin", id: "${newComponentVersionId}" )
+  step($class: 'UploadBuild', 
+       tenantId: "5ade13625558f2c6688d15ce", 
+       revision: "${GIT_COMMIT}", 
+       appName: "Altoro", 
+       requestor: "admin", 
+       id: "${newComponentVersionId}", 
+       versionName: "1.0.${BUILD_NUMBER}"
+      )
+     
+	echo "Demo123 ${newComponentVersionId}"
 	sleep 25
 	  step([$class: 'UCDeployPublisher',
 		deploy: [ createSnapshot: [deployWithSnapshot: true, 
